@@ -1,0 +1,104 @@
+'use client';
+
+import React from 'react';
+import { LineCardData } from '@/types/line';
+
+interface LineCardProps {
+  data: LineCardData;
+  onEdit?: (data: LineCardData) => void;
+  clickable?: boolean;
+}
+
+// Distinct solid text colors per Area on solid black background
+const getAreaTextColor = (area?: string, code?: string) => {
+  const upperArea = (area || '').toUpperCase().trim();
+  if (upperArea === 'ASSY') return 'text-[#fbbf24]'; // Amber Gold
+  if (upperArea === 'MACHINING') return 'text-[#38bdf8]'; // Electric Sky Cyan
+  if (upperArea === 'FORGING') return 'text-[#f97316]'; // Vivid Orange
+  if (upperArea === 'PPIC' || upperArea === 'QC') return 'text-[#34d399]'; // Luminous Emerald
+
+  // Dynamic fallback palette for other line areas
+  const colors = [
+    'text-[#fbbf24]',
+    'text-[#38bdf8]',
+    'text-[#f97316]',
+    'text-[#34d399]',
+    'text-[#c084fc]',
+    'text-[#f472b6]',
+  ];
+  let hash = 0;
+  const str = upperArea || code || 'DEFAULT';
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return colors[Math.abs(hash) % colors.length];
+};
+
+export const LineCard: React.FC<LineCardProps> = ({
+  data,
+  onEdit,
+  clickable = false,
+}) => {
+  const isRed = data.status === 'RED';
+  const isYellow = data.status === 'YELLOW';
+
+  // Card color styling with +20 hue shift gradient towards bottom-right (135deg)
+  // RED: Base Hue 356° -> +20° Hue 16° (Vivid Orange-Red)
+  // YELLOW: Base Hue 48° -> +20° Hue 68° (Radiant Chartreuse-Gold)
+  // GREEN: Base Hue 148° -> +20° Hue 168° (Luminous Teal-Emerald)
+  const bgStyle = isRed
+    ? 'bg-[linear-gradient(135deg,hsl(356,85%,44%)_0%,hsl(16,95%,48%)_100%)] text-white shadow-red-950/30'
+    : isYellow
+    ? 'bg-[linear-gradient(135deg,hsl(48,100%,46%)_0%,hsl(68,96%,45%)_100%)] text-black shadow-yellow-950/30'
+    : 'bg-[linear-gradient(135deg,hsl(148,100%,33%)_0%,hsl(168,100%,33%)_100%)] text-white shadow-green-950/30';
+
+  const labelColor = isYellow ? 'text-black/80' : 'text-white/80';
+  const subValueColor = isYellow ? 'text-black/75' : 'text-white/75';
+  const borderColor = isYellow ? 'border-black/15' : 'border-white/15';
+
+  return (
+    <div
+      onClick={() => clickable && onEdit?.(data)}
+      className={`relative flex flex-col justify-between h-full w-full rounded-md shadow p-1.5 sm:p-2 select-none transition-all duration-150 overflow-hidden ${bgStyle} ${
+        clickable ? 'cursor-pointer hover:brightness-105 active:scale-[0.99]' : ''
+      }`}
+    >
+      {/* Solid Black Badge aligned top-right (inset top-1.5 right-1.5, not touching edge) */}
+      {data.area && (
+        <span
+          className={`absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[8px] sm:text-[9px] font-black uppercase tracking-wider bg-black border border-black shadow-md z-10 select-none ${getAreaTextColor(
+            data.area,
+            data.code
+          )}`}
+        >
+          {data.area}
+        </span>
+      )}
+
+      {/* Top section: Station Code (Nama Line Singkatan) */}
+      <div className="flex items-start justify-between min-w-0 leading-none pr-16">
+        <h2 className="text-base sm:text-lg lg:text-2xl xl:text-3xl font-black tracking-tight uppercase truncate">
+          {data.code}
+        </h2>
+      </div>
+
+      {/* Subtitle Line Name */}
+      {data.name && (
+        <p className={`text-[10px] sm:text-xs font-semibold truncate leading-tight mt-0.5 ${labelColor}`}>
+          {data.name}
+        </p>
+      )}
+
+      {/* Main Metric Value & Change */}
+      <div className="text-right my-auto py-0.5">
+        <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-black tracking-tighter leading-none truncate">
+          {data.value}
+        </div>
+        <div className={`text-[10px] sm:text-xs font-bold mt-1 leading-none ${subValueColor}`}>
+          {data.change}
+        </div>
+      </div>
+
+    </div>
+  );
+};

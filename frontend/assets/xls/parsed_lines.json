@@ -1,0 +1,240 @@
+[
+    {
+        "No":  "2",
+        "Code":  "2CF",
+        "Name":  "SPINDLE 2CF",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "3",
+        "Code":  "ASSYARMC",
+        "Name":  "Assy Arm Cushion",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "4",
+        "Code":  "ASSYSJ",
+        "Name":  "Assy Screw Jack",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "5",
+        "Code":  "ASSYSTEMA",
+        "Name":  "Assy Stem Manual",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "6",
+        "Code":  "ASSYSTEMB",
+        "Name":  "Assy Stem Auto",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "7",
+        "Code":  "BRC",
+        "Name":  "Ball Race",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "8",
+        "Code":  "CRC",
+        "Name":  "Cone race",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "9",
+        "Code":  "D14",
+        "Name":  "HF D14N",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "10",
+        "Code":  "D34",
+        "Name":  "HF D34T",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "11",
+        "Code":  "D80",
+        "Name":  "HF D80N",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "12",
+        "Code":  "EXPORT",
+        "Name":  "PAMA  EXPORT",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "13",
+        "Code":  "F1",
+        "Name":  "FORING 1",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "14",
+        "Code":  "F10",
+        "Name":  "FORGING 10",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "15",
+        "Code":  "F11",
+        "Name":  "FORGING 11",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "16",
+        "Code":  "F4",
+        "Name":  "FORGING 4",
+        "Area":  "FORGING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "17",
+        "Code":  "F5",
+        "Name":  "FORGING 5",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "18",
+        "Code":  "F6",
+        "Name":  "FORGING 6",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "19",
+        "Code":  "F7",
+        "Name":  "FORGING 7",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "20",
+        "Code":  "F8",
+        "Name":  "FORGING 8",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "21",
+        "Code":  "F9",
+        "Name":  "FORGING 9",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "22",
+        "Code":  "FG1",
+        "Name":  "PJ FG 1",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "23",
+        "Code":  "FG2",
+        "Name":  "PJ FG 2",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "24",
+        "Code":  "HPM",
+        "Name":  "HF HPM",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "25",
+        "Code":  "LBJ",
+        "Name":  "LOWER BALL JOINT",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "26",
+        "Code":  "MSCH",
+        "Name":  "MACHINING SHAFT",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "27",
+        "Code":  "RT1",
+        "Name":  "ROTOR-1",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "28",
+        "Code":  "RT2",
+        "Name":  "ROTOR-2",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "29",
+        "Code":  "SFGPJ",
+        "Name":  "PJ SFG",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "30",
+        "Code":  "SJ650",
+        "Name":  "ASSY SCREW JACK",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "31",
+        "Code":  "TW",
+        "Name":  "TIRE WRENCH",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    },
+    {
+        "No":  "32",
+        "Code":  "UB14",
+        "Name":  "UNDER BRACKET 1-4",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "33",
+        "Code":  "UB23",
+        "Name":  "UNDER BRACKET 2-3",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "34",
+        "Code":  "UB5",
+        "Name":  "UNDER BRACKET 5",
+        "Area":  "MACHINING",
+        "Status":  "Active"
+    },
+    {
+        "No":  "35",
+        "Code":  "UB67",
+        "Name":  "UNDER BRACKET 6-7",
+        "Area":  "ASSY",
+        "Status":  "Active"
+    }
+]
