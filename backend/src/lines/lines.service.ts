@@ -114,11 +114,11 @@ const INITIAL_LINES: LineCard[] = [
     name: 'HF D34T',
     area: 'MACHINING',
     metricLabel: 'OUTPUT RATE:',
-    value: '79.5%',
-    change: '-0.69%',
+    value: 'OFFLINE',
+    change: 'MAINTENANCE',
     subMetricLabel: 'BALANCE:',
-    subMetricValue: '-100',
-    status: 'RED',
+    subMetricValue: '0',
+    status: 'GRAY',
     order: 9,
   },
   {
@@ -192,11 +192,11 @@ const INITIAL_LINES: LineCard[] = [
     name: 'FORGING 4',
     area: 'FORGING',
     metricLabel: 'OUTPUT RATE:',
-    value: '82.0%',
-    change: '-1.45%',
+    value: '0%',
+    change: 'OFF',
     subMetricLabel: 'BALANCE:',
-    subMetricValue: '-45',
-    status: 'RED',
+    subMetricValue: '0',
+    status: 'GRAY',
     order: 15,
   },
   {
@@ -387,11 +387,11 @@ const INITIAL_LINES: LineCard[] = [
     name: 'TIRE WRENCH',
     area: 'ASSY',
     metricLabel: 'OUTPUT RATE:',
-    value: '89.0%',
-    change: '-1.15%',
+    value: 'STOPPED',
+    change: 'NO PROD',
     subMetricLabel: 'BALANCE:',
-    subMetricValue: '-18',
-    status: 'RED',
+    subMetricValue: '0',
+    status: 'GRAY',
     order: 30,
   },
   {
@@ -413,11 +413,11 @@ const INITIAL_LINES: LineCard[] = [
     name: 'UNDER BRACKET 2-3',
     area: 'MACHINING',
     metricLabel: 'OUTPUT RATE:',
-    value: '81.0%',
-    change: '-2.85%',
+    value: 'ERROR',
+    change: 'BREAKDOWN',
     subMetricLabel: 'BALANCE:',
-    subMetricValue: '-54',
-    status: 'RED',
+    subMetricValue: '0',
+    status: 'GRAY',
     order: 32,
   },
   {
@@ -453,7 +453,10 @@ export class LinesService {
   private lines: LineCard[] = JSON.parse(JSON.stringify(INITIAL_LINES));
 
   findAll(): LineCard[] {
-    if (this.lines.some((l) => l.code === 'STN-P' || l.id === 'stn-p' || l.code === 'QC-LAB' || l.code.startsWith('STN-'))) {
+    if (
+      !this.lines.some((l) => l.status === 'GRAY') ||
+      this.lines.some((l) => l.code === 'STN-P' || l.id === 'stn-p' || l.code === 'QC-LAB' || l.code.startsWith('STN-'))
+    ) {
       this.lines = JSON.parse(JSON.stringify(INITIAL_LINES));
     }
     return [...this.lines].sort((a, b) => a.order - b.order);

@@ -22,10 +22,15 @@ export const LineGrid: React.FC<LineGridProps> = ({ lines, onEdit, clickable = f
     return Array.from(set);
   }, [lines]);
 
-  // Filter lines by area
+  // Filter lines by area & sort GRAY (Off/Eror) cards to the very end/bottom
   const filteredLines = useMemo(() => {
-    if (selectedArea === 'ALL') return lines;
-    return lines.filter((l) => l.area === selectedArea);
+    const list = selectedArea === 'ALL' ? [...lines] : lines.filter((l) => l.area === selectedArea);
+    return list.sort((a, b) => {
+      const aGray = a.status === 'GRAY' ? 1 : 0;
+      const bGray = b.status === 'GRAY' ? 1 : 0;
+      if (aGray !== bGray) return aGray - bGray;
+      return (a.order || 0) - (b.order || 0);
+    });
   }, [lines, selectedArea]);
 
   if (!lines || lines.length === 0) {
@@ -61,7 +66,7 @@ export const LineGrid: React.FC<LineGridProps> = ({ lines, onEdit, clickable = f
             onClick={() => setSelectedArea('ALL')}
             className={`px-2.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold transition-colors ${
               selectedArea === 'ALL'
-                ? 'bg-orange-600 text-white'
+                ? 'bg-blue-600 text-white shadow-sm'
                 : 'text-neutral-400 hover:text-white'
             }`}
           >
@@ -75,7 +80,7 @@ export const LineGrid: React.FC<LineGridProps> = ({ lines, onEdit, clickable = f
                 onClick={() => setSelectedArea(area)}
                 className={`px-2.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold transition-colors ${
                   selectedArea === area
-                    ? 'bg-orange-600 text-white'
+                    ? 'bg-blue-600 text-white shadow-sm'
                     : 'text-neutral-400 hover:text-white'
                 }`}
               >

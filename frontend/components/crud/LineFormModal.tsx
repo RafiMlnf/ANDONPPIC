@@ -189,11 +189,11 @@ export const LineFormModal: React.FC<LineFormModalProps> = ({
               <label className="block text-xs font-semibold text-neutral-300 mb-1">
                 Status / Alert Color *
               </label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button
                   type="button"
                   onClick={() => setStatus('RED')}
-                  className={`py-2 px-3 rounded-md text-xs font-bold transition-all ${
+                  className={`py-2 px-2.5 rounded-md text-xs font-bold transition-all ${
                     status === 'RED'
                       ? 'bg-[linear-gradient(135deg,hsl(356,85%,44%)_0%,hsl(16,95%,48%)_100%)] text-white ring-2 ring-white ring-offset-2 ring-offset-black shadow-md'
                       : 'bg-red-950/40 text-red-300 border border-red-800/50 hover:bg-red-900/40'
@@ -204,7 +204,7 @@ export const LineFormModal: React.FC<LineFormModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setStatus('YELLOW')}
-                  className={`py-2 px-3 rounded-md text-xs font-bold transition-all ${
+                  className={`py-2 px-2.5 rounded-md text-xs font-bold transition-all ${
                     status === 'YELLOW'
                       ? 'bg-[linear-gradient(135deg,hsl(48,100%,46%)_0%,hsl(68,96%,45%)_100%)] text-black ring-2 ring-white ring-offset-2 ring-offset-black shadow-md'
                       : 'bg-yellow-950/40 text-yellow-300 border border-yellow-800/50 hover:bg-yellow-900/40'
@@ -215,13 +215,24 @@ export const LineFormModal: React.FC<LineFormModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setStatus('GREEN')}
-                  className={`py-2 px-3 rounded-md text-xs font-bold transition-all ${
+                  className={`py-2 px-2.5 rounded-md text-xs font-bold transition-all ${
                     status === 'GREEN'
                       ? 'bg-[linear-gradient(135deg,hsl(148,100%,33%)_0%,hsl(168,100%,33%)_100%)] text-white ring-2 ring-white ring-offset-2 ring-offset-black shadow-md'
                       : 'bg-green-950/40 text-green-300 border border-green-800/50 hover:bg-green-900/40'
                   }`}
                 >
                   GREEN
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStatus('GRAY')}
+                  className={`py-2 px-2.5 rounded-md text-xs font-bold transition-all ${
+                    status === 'GRAY'
+                      ? 'bg-[linear-gradient(135deg,hsl(220,14%,24%)_0%,hsl(220,14%,15%)_100%)] text-white ring-2 ring-white ring-offset-2 ring-offset-black shadow-md'
+                      : 'bg-neutral-800/80 text-neutral-300 border border-neutral-700 hover:bg-neutral-700/80'
+                  }`}
+                >
+                  GRAY (OFF)
                 </button>
               </div>
             </div>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, SlidersHorizontal, Maximize, Minimize, RefreshCw } from 'lucide-react';
+import { Settings, Maximize, Minimize, RefreshCw } from 'lucide-react';
 
 interface NavigationBarProps {
   onRefresh?: () => void;
@@ -30,70 +30,53 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onRefresh, isRefre
     }
   };
 
-  const isLive = pathname === '/';
   const isCrud = pathname.startsWith('/lines');
 
   return (
-    <header className="w-full bg-[#0a0c10] border-b border-neutral-800/80 px-4 py-2 flex items-center justify-between text-xs select-none">
-      {/* Brand / Mode tabs */}
+    <header className="w-full bg-[#0a0c10] border-b border-neutral-800/80 px-3 sm:px-4 py-1.5 flex items-center justify-between text-xs select-none">
+      {/* Left: Brand logo & title */}
       <div className="flex items-center gap-2">
-        <div className="flex items-center gap-1 bg-neutral-900/90 p-1 rounded-lg border border-neutral-800">
-          <Link
-            href="/"
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-semibold transition-all ${
-              isLive
-                ? 'bg-[#ff5f00] text-white shadow-sm'
-                : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
-            }`}
-          >
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            <span>Live Display</span>
-          </Link>
-
-          <Link
-            href="/lines"
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-semibold transition-all ${
-              isCrud
-                ? 'bg-[#ff5f00] text-white shadow-sm'
-                : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
-            }`}
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            <span>Manage Lines (CRUD)</span>
-          </Link>
-        </div>
+        <Link href="/" className="flex items-center gap-2 text-white hover:opacity-90 transition-opacity">
+          <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+          <span className="font-extrabold tracking-wider text-xs uppercase text-neutral-200">
+            ANDON PPIC
+          </span>
+        </Link>
       </div>
 
-      {/* Action buttons (Refresh & Fullscreen) */}
-      <div className="flex items-center gap-2">
+      {/* Right side: Action icons (Refresh, Fullscreen, & Small Settings Icon for Manage Lines) */}
+      <div className="flex items-center gap-1.5">
         {onRefresh && (
           <button
             onClick={onRefresh}
             disabled={isRefreshing}
-            className="p-1.5 rounded-md bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors disabled:opacity-50"
+            className="p-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors disabled:opacity-50"
             title="Refresh Data"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-orange-500' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-blue-500' : ''}`} />
           </button>
         )}
 
         <button
           onClick={toggleFullscreen}
-          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
-          title="Toggle Fullscreen"
+          className="p-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+          title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
         >
-          {isFullscreen ? (
-            <>
-              <Minimize className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Exit Fullscreen</span>
-            </>
-          ) : (
-            <>
-              <Maximize className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Fullscreen</span>
-            </>
-          )}
+          {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
         </button>
+
+        {/* Small Settings Gear Icon for Manage Lines */}
+        <Link
+          href={isCrud ? '/' : '/lines'}
+          className={`p-1.5 rounded-lg border transition-colors ${
+            isCrud
+              ? 'bg-blue-600 border-blue-600 text-white shadow-md'
+              : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800'
+          }`}
+          title={isCrud ? 'Return to Live Display' : 'Manage Station Lines (Settings)'}
+        >
+          <Settings className={`w-4 h-4 ${isCrud ? 'rotate-90 text-white' : ''} transition-transform`} />
+        </Link>
       </div>
     </header>
   );

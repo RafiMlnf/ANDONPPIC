@@ -1,4 +1,4 @@
-export type StatusColor = 'RED' | 'YELLOW' | 'GREEN';
+export type StatusColor = 'RED' | 'YELLOW' | 'GREEN' | 'GRAY';
 
 export interface LineCardData {
   id: string;

@@ -1,4 +1,4 @@
-export type LineStatus = 'RED' | 'YELLOW' | 'GREEN';
+export type LineStatus = 'RED' | 'YELLOW' | 'GREEN' | 'GRAY';
 
 export class LineCard {
   id: string;

@@ -2,7 +2,7 @@ import { LineCardData } from '@/types/line';
 import { INITIAL_LINES } from './initialData';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/lines';
-const STORAGE_KEY = 'mtm_andon_ppic_master_lines_v3';
+const STORAGE_KEY = 'mtm_andon_ppic_master_lines_v4';
 
 // Helper to filter out any legacy dummy cards (STN-P, QC-LAB, etc.)
 function filterOutLegacyMockData(lines: LineCardData[]): LineCardData[] {
@@ -41,6 +41,7 @@ function getLocalLines(): LineCardData[] {
     // Purge old keys if present
     localStorage.removeItem('mtm_andon_lines_data');
     localStorage.removeItem('mtm_andon_ppic_master_lines');
+    localStorage.removeItem('mtm_andon_ppic_master_lines_v3');
 
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
@@ -49,7 +50,10 @@ function getLocalLines(): LineCardData[] {
     }
     const parsed = JSON.parse(raw);
     const clean = filterOutLegacyMockData(parsed);
-    if (clean.length === 0) {
+
+    // Auto-update if local data has no GRAY cards yet
+    const hasGray = clean.some((l) => l.status === 'GRAY');
+    if (clean.length === 0 || !hasGray) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_LINES));
       return INITIAL_LINES;
     }

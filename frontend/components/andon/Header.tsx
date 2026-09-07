@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
         <h1 className="text-3xl lg:text-4xl font-black tracking-tight leading-none text-white">
           {title}
         </h1>
-        <div className="text-2xl lg:text-3xl font-black tracking-tight leading-none text-[#ff5f00] mt-1">
+        <div className="text-2xl lg:text-3xl font-black tracking-tight leading-none text-blue-500 mt-1">
           {subtitle}
         </div>
       </div>

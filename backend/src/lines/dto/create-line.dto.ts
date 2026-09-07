@@ -7,6 +7,6 @@ export class CreateLineDto {
   change: string;
   subMetricLabel: string;
   subMetricValue: string;
-  status: 'RED' | 'YELLOW' | 'GREEN';
+  status: 'RED' | 'YELLOW' | 'GREEN' | 'GRAY';
   order?: number;
 }

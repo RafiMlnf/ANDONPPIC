@@ -24,9 +24,9 @@ export const LineTable: React.FC<LineTableProps> = ({
   const [search, setSearch] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
 
-  // Filter and search logic
+  // Filter and search logic (GRAY status sorted to the bottom)
   const filteredLines = useMemo(() => {
-    return lines.filter((line) => {
+    const list = lines.filter((line) => {
       const matchSearch =
         line.code.toLowerCase().includes(search.toLowerCase()) ||
         line.metricLabel.toLowerCase().includes(search.toLowerCase()) ||
@@ -36,11 +36,19 @@ export const LineTable: React.FC<LineTableProps> = ({
 
       return matchSearch && matchStatus;
     });
+
+    return list.sort((a, b) => {
+      const aGray = a.status === 'GRAY' ? 1 : 0;
+      const bGray = b.status === 'GRAY' ? 1 : 0;
+      if (aGray !== bGray) return aGray - bGray;
+      return (a.order || 0) - (b.order || 0);
+    });
   }, [lines, search, selectedStatus]);
 
   const redCount = lines.filter((l) => l.status === 'RED').length;
   const yellowCount = lines.filter((l) => l.status === 'YELLOW').length;
   const greenCount = lines.filter((l) => l.status === 'GREEN').length;
+  const grayCount = lines.filter((l) => l.status === 'GRAY').length;
 
   return (
     <div className="space-y-4">
@@ -104,6 +112,17 @@ export const LineTable: React.FC<LineTableProps> = ({
               <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />
               Green ({greenCount})
             </button>
+            <button
+              onClick={() => setSelectedStatus('GRAY')}
+              className={`px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1 transition-colors ${
+                selectedStatus === 'GRAY'
+                  ? 'bg-neutral-700 text-white shadow-sm'
+                  : 'text-neutral-400 hover:text-neutral-200'
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full bg-neutral-400 inline-block" />
+              Gray / Off ({grayCount})
+            </button>
           </div>
         </div>
 
@@ -162,11 +181,14 @@ export const LineTable: React.FC<LineTableProps> = ({
                   const isRed = line.status === 'RED';
                   const isYellow = line.status === 'YELLOW';
                   const isGreen = line.status === 'GREEN';
+                  const isGray = line.status === 'GRAY';
 
                   const badgeClass = isRed
                     ? 'bg-red-500/20 text-red-400 border border-red-500/30'
                     : isYellow
                     ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30'
+                    : isGray
+                    ? 'bg-neutral-500/20 text-neutral-400 border border-neutral-500/30'
                     : 'bg-green-500/20 text-green-400 border border-green-500/30';
 
                   return (
@@ -206,6 +228,8 @@ export const LineTable: React.FC<LineTableProps> = ({
                                 ? 'bg-red-500'
                                 : isYellow
                                 ? 'bg-yellow-400'
+                                : isGray
+                                ? 'bg-neutral-400'
                                 : 'bg-green-500'
                             }`}
                           />
